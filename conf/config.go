@@ -21,16 +21,17 @@ var (
 	DbName   string
 
 	RedisDb     string
-	RedisPw     int
+	RedisPw     string
 	RedisAddr   string
 	RedisDbName int
 
 	MongoClient *mongo.Client
 	MongoDb     string
-	MongoPw     int
+	MongoPw     string
 	MongoAddr   string
 	MongoDbName string
 	MongoPort   string
+	MongoUsr    string
 )
 
 func init() {
@@ -38,23 +39,25 @@ func init() {
 	ini.SetConfigName("conf")
 	ini.SetConfigType("yaml")
 	ini.AddConfigPath("./conf/")
+	ini.AddConfigPath("../conf/")
 	err := ini.ReadInConfig()
 	if err != nil {
 		panic(fmt.Sprintf("read init err: %s", err.Error()))
 	}
 	RedisIni()
-	mongoini()
+	Mongoini()
 }
 
 func RedisIni() {
 	RedisAddr = ini.GetString("Redis.Addr")
-	RedisPw = ini.GetInt("Redis.Pw")
+	RedisPw = ini.GetString("Redis.Pw")
 	RedisDb = ini.GetString("Redis.Db")
 	RedisDbName = ini.GetInt("Redis.Name")
 }
-func mongoini() {
+func Mongoini() {
 	MongoAddr = ini.GetString("Mongo.Addr")
-	MongoPw = ini.GetInt("Mongo.Pw")
+	MongoPw = ini.GetString("Mongo.Pw")
+	MongoUsr = ini.GetString("Mongo.Usr")
 	MongoDb = ini.GetString("Mongo.Db")
 	MongoDbName = ini.GetString("Mongo.Name")
 	MongoPort = ini.GetString("Mongo.Port")
