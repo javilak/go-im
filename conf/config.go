@@ -36,6 +36,7 @@ var (
 	Mailpw   string
 	Mailac   string
 	Mailaddr string
+	Mailhost string
 )
 
 func init() {
@@ -85,4 +86,5 @@ func mailini() {
 	Mailaddr = ini.GetString("mail.addr")
 	Mailac = ini.GetString("mail.accout")
 	Mailpw = ini.GetString("mail.passwd")
+	Mailhost = ini.GetString("mail.host")
 }
