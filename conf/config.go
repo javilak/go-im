@@ -32,6 +32,10 @@ var (
 	MongoDbName string
 	MongoPort   string
 	MongoUsr    string
+
+	Mailpw   string
+	Mailac   string
+	Mailaddr string
 )
 
 func init() {
@@ -46,6 +50,7 @@ func init() {
 	}
 	RedisIni()
 	Mongoini()
+	mailini()
 }
 
 func RedisIni() {
@@ -74,4 +79,10 @@ func Mongodb() {
 	}
 	logrus.Info("mongodb connected success!")
 
+}
+
+func mailini() {
+	Mailaddr = ini.GetString("mail.addr")
+	Mailac = ini.GetString("mail.accout")
+	Mailpw = ini.GetString("mail.passwd")
 }
